@@ -29,6 +29,7 @@ const MyBookedEvents = () => {
           endAt={event.endAt}
           organiserId={event.userId}
           userId={user._id}
+          players={event.players}
           pending={event.pending.includes(user.username)}
           rejected={event.rejected.includes(user.username)}
           confirmed={event.players.includes(user.username)}

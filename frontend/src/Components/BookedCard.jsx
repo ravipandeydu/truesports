@@ -57,6 +57,11 @@ const BookedCard = (props) => {
             {time(props.endAt)} {day(props.endAt)}-{month(props.endAt)}-
             {year(props.endAt)}
           </Text>
+          {props.confirmed ? (
+            <Text py="2">Players: {props.players.length > 0 && props.players.join(", ")}</Text>
+          ) : (
+            ""
+          )}
         </CardBody>
 
         <CardFooter>

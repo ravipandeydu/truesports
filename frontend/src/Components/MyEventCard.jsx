@@ -40,7 +40,7 @@ const MyEventCard = (props) => {
   let event = props.event;
   const handleApprove = (eventId, event, el) => {
     if (event.userId === user._id) {
-      let remaining = event.pending.filter((e) => e.username === el);
+      let remaining = event.pending.filter((e) => e !== el);
       console.log(remaining);
       dispatch(
         bookEvents(eventId, {

@@ -101,6 +101,8 @@ const AllEvents = () => {
           endAt={event.endAt}
           organiserId={event.userId}
           userId={user._id}
+          event={event}
+          eventId={event._id}
           players={event.players}
           playersLimit={event.playersLimit}
           pending={event.pending.includes(user.username)}
