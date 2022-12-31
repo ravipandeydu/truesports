@@ -10,24 +10,40 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/auth/auth.actions";
-import logo from "../assets/true-sports-logo.png"
+import logo from "../assets/true-sports-logo.png";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const isAuth = useSelector((state) => state.auth.isAuth);
+  // const isAuth = useSelector((state) => state.auth.isAuth);
+  const token = localStorage.getItem("token");
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user).user;
+  const navigate = useNavigate();
+  // const user = useSelector((state) => state.auth.user).user;
+  const user = JSON.parse(localStorage.getItem("user"));
+  const events = useSelector((state) => state.events.data);
+  // let myevents=[];
+  // if (events.length > 0) {
+  // let myevents = events.filter((event) => event.userId === user?._id);
   const myevents = useSelector((state) => state.events.data).filter(
-    (event) => event.userId === user?._id
+    (event) => event.userId === user?.user?._id
   );
+  console.log(myevents);
+  // }
+  // const myevents = useSelector((state) => state.events.data)?.filter(
+  //   (event) => event.userId === user?._id
+  // );
+  // let notifications=0;
+  // if (myevents.length > 0) {
   let notifications = myevents.reduce(
     (total, current) => total + current.pending.length,
     0
   );
+  console.log(notifications);
+  // }
 
   function handleLogout() {
     dispatch(logout());
@@ -59,17 +75,28 @@ const Navbar = () => {
       <Link to="/myevents">
         <Tooltip
           label={
-            isAuth && notifications > 0
+            token && notifications > 0
               ? `${notifications} pending requests`
               : ""
           }
           aria-label="A tooltip"
         >
           <Flex>
-            <Text pl={6} py={2} fontSize="xl">
+            <Box position={"relative"} pl={6} py={2} px={7} fontSize="xl">
               My Events
-            </Text>
-            <Box>{isAuth && notifications > 0 ? notifications : ""}</Box>
+              <Text
+                color="black"
+                fontSize={"18px"}
+                position={"absolute"}
+                top={0}
+                right={0}
+                bg={"white"}
+                borderRadius="50%"
+                px={"2"}
+              >
+                {notifications > 0 ? notifications : ""}
+              </Text>
+            </Box>
           </Flex>
         </Tooltip>
       </Link>
@@ -79,10 +106,10 @@ const Navbar = () => {
         </Text>
       </Link>
       <Spacer />
-      {isAuth ? (
+      {token ? (
         <Flex gap={"10px"}>
           <Box px={6} py={2} fontWeight="600" fontSize={"18px"}>
-            {user.username}
+            {user?.user?.username}
           </Box>
           <Button px={6} py={2} onClick={handleLogout}>
             Logout

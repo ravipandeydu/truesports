@@ -16,7 +16,7 @@ export const getAllEvents =
   async (dispatch) => {
     dispatch({ type: GET_EVENTS_LOADING });
     try {
-      let response = await axios.get("http://localhost:8080/event/", {
+      let response = await axios.get("https://truesports.onrender.com/event/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -40,7 +40,7 @@ export const getAllEvents =
 export const getMyEvents = (token, user) => async (dispatch) => {
   dispatch({ type: GET_EVENTS_LOADING });
   try {
-    let response = await axios.get("http://localhost:8080/event/", {
+    let response = await axios.get("https://truesports.onrender.com/event/", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -57,7 +57,7 @@ export const getMyEvents = (token, user) => async (dispatch) => {
 export const postEvents = (token, event) => async (dispatch) => {
   dispatch({ type: POST_EVENTS_LOADING });
   try {
-    await axios.post("http://localhost:8080/event/create", event, {
+    await axios.post("https://truesports.onrender.com/event/create", event, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -71,7 +71,7 @@ export const postEvents = (token, event) => async (dispatch) => {
 export const bookEvents = (eventId, event) => async (dispatch) => {
   dispatch({ type: PATCH_EVENTS_LOADING });
   try {
-    await axios.patch(`http://localhost:8080/event/edit/${eventId}`, event, {
+    await axios.patch(`https://truesports.onrender.com/event/edit/${eventId}`, event, {
       // headers: {
       //   Authorization: `Bearer ${token}`,
       // },
@@ -85,8 +85,7 @@ export const bookEvents = (eventId, event) => async (dispatch) => {
 export const searchEvents = (r) => async (dispatch) => {
   dispatch({ type: GET_EVENTS_LOADING });
   try {
-    let response = await axios.get(`http://localhost:8080/event/search?q=${r}`);
-    // let events = response.data.filter((event) => event.userId === user._id);
+    let response = await axios.get(`https://truesports.onrender.com/event/search?q=${r}`);
     dispatch({ type: GET_EVENTS_SUCCESS, payload: response.data });
     console.log(response);
     return response.data;

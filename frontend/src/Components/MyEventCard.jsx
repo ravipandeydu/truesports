@@ -8,7 +8,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
   Heading,
   Image,
   Modal,

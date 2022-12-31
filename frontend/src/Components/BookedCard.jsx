@@ -12,10 +12,6 @@ import {
 import React from "react";
 
 const BookedCard = (props) => {
-  // let time = (text) => text.substring(11, 16);
-  // let day = (text) => text.substring(8, 10);
-  // let month = (text) => text.substring(5, 7);
-  // let year = (text) => text.substring(0, 4);
   let startTime = new Date(`${props.startAt}`).toLocaleString();
   let endTime = new Date(`${props.endAt}`).toLocaleString();
   console.log(startTime);

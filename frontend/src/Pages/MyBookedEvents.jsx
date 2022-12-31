@@ -14,21 +14,21 @@ import { getAllEvents } from "../Redux/events/events.actions";
 
 const MyBookedEvents = () => {
   const token = useSelector((state) => state.auth.user).token;
-  const user = useSelector((state) => state.auth.user).user;
-  const myevents = useSelector((state) => state.events.data).filter(
+  const user = JSON.parse(localStorage.getItem("user"));
+  const myevents = useSelector((state) => state.events.data)?.filter(
     (event) =>
-      event.pending.includes(user.username) ||
-      event.players.includes(user.username) ||
-      event.rejected.includes(user.username)
+      event.pending.includes(user?.user?.username) ||
+      event.players.includes(user?.user?.username) ||
+      event.rejected.includes(user?.user?.username)
   );
-  const myeventsAccepted = useSelector((state) => state.events.data).filter(
-    (event) => event.players.includes(user.username)
+  const myeventsAccepted = useSelector((state) => state.events.data)?.filter(
+    (event) => event.players.includes(user?.user?.username)
   );
-  const myeventsPending = useSelector((state) => state.events.data).filter(
-    (event) => event.pending.includes(user.username)
+  const myeventsPending = useSelector((state) => state.events.data)?.filter(
+    (event) => event.pending.includes(user?.user?.username)
   );
-  const myeventsRejected = useSelector((state) => state.events.data).filter(
-    (event) => event.rejected.includes(user.username)
+  const myeventsRejected = useSelector((state) => state.events.data)?.filter(
+    (event) => event.rejected.includes(user?.user?.username)
   );
   const dispatch = useDispatch();
   useEffect(() => {
@@ -55,11 +55,11 @@ const MyBookedEvents = () => {
                 startAt={event.startAt}
                 endAt={event.endAt}
                 organiserId={event.userId}
-                userId={user._id}
+                userId={user?.user?._id}
                 players={event.players}
-                pending={event.pending.includes(user.username)}
-                rejected={event.rejected.includes(user.username)}
-                confirmed={event.players.includes(user.username)}
+                pending={event.pending.includes(user?.user?.username)}
+                rejected={event.rejected.includes(user?.user?.username)}
+                confirmed={event.players.includes(user?.user?.username)}
                 handleBook={() => handleClick(event._id, event)}
               />
             ))}
@@ -74,11 +74,11 @@ const MyBookedEvents = () => {
                 startAt={event.startAt}
                 endAt={event.endAt}
                 organiserId={event.userId}
-                userId={user._id}
+                userId={user?.user?._id}
                 players={event.players}
-                pending={event.pending.includes(user.username)}
-                rejected={event.rejected.includes(user.username)}
-                confirmed={event.players.includes(user.username)}
+                pending={event.pending.includes(user?.user?.username)}
+                rejected={event.rejected.includes(user?.user?.username)}
+                confirmed={event.players.includes(user?.user?.username)}
                 handleBook={() => handleClick(event._id, event)}
               />
             ))}
@@ -93,11 +93,11 @@ const MyBookedEvents = () => {
                 startAt={event.startAt}
                 endAt={event.endAt}
                 organiserId={event.userId}
-                userId={user._id}
+                userId={user?.user?._id}
                 players={event.players}
-                pending={event.pending.includes(user.username)}
-                rejected={event.rejected.includes(user.username)}
-                confirmed={event.players.includes(user.username)}
+                pending={event.pending.includes(user?.user?.username)}
+                rejected={event.rejected.includes(user?.user?.username)}
+                confirmed={event.players.includes(user?.user?.username)}
                 handleBook={() => handleClick(event._id, event)}
               />
             ))}
@@ -112,11 +112,11 @@ const MyBookedEvents = () => {
                 startAt={event.startAt}
                 endAt={event.endAt}
                 organiserId={event.userId}
-                userId={user._id}
+                userId={user?.user?._id}
                 players={event.players}
-                pending={event.pending.includes(user.username)}
-                rejected={event.rejected.includes(user.username)}
-                confirmed={event.players.includes(user.username)}
+                pending={event.pending.includes(user?.user?.username)}
+                rejected={event.rejected.includes(user?.user?.username)}
+                confirmed={event.players.includes(user?.user?.username)}
                 handleBook={() => handleClick(event._id, event)}
               />
             ))}

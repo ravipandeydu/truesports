@@ -17,15 +17,17 @@ const handleUser = (payload) => ({
 export const loginSuccess = (creds) => async (dispatch) => {
   dispatch({ type: AUTH_LOGIN_LOADING });
   try {
-    await axios.post("http://localhost:8080/user/login", creds).then((data) => {
-      console.log(data);
-      if (data.data.error) {
-        dispatch({ type: AUTH_LOGIN_ERROR, payload: data.data.error });
-      } else {
-        dispatch({ type: AUTH_LOGIN_SUCCESS, payload: data.data });
-      }
-      return data;
-    });
+    await axios
+      .post("https://truesports.onrender.com/user/login", creds)
+      .then((data) => {
+        console.log(data);
+        if (data.data.error) {
+          dispatch({ type: AUTH_LOGIN_ERROR, payload: data.data.error });
+        } else {
+          dispatch({ type: AUTH_LOGIN_SUCCESS, payload: data.data });
+        }
+        return data;
+      });
   } catch (e) {
     dispatch({ type: AUTH_LOGIN_ERROR });
   }
@@ -35,7 +37,7 @@ export const signupSuccess = (creds) => async (dispatch) => {
   dispatch({ type: AUTH_SIGNUP_LOADING });
   try {
     await axios
-      .post("http://localhost:8080/user/signup", creds)
+      .post("https://truesports.onrender.com/user/signup", creds)
       .then((data) => {
         console.log(data);
         if (data.data.error) {

@@ -2,8 +2,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
-  Divider,
   FormLabel,
   Input,
   Modal,
@@ -54,7 +52,6 @@ const CreateEvents = (props) => {
                 <Input name="title" onChange={props.handleChange} />
                 <FormLabel>Desc</FormLabel>
                 <Textarea
-                  // value={message}
                   name="desc"
                   onChange={props.handleChange}
                   type="text"
@@ -63,7 +60,6 @@ const CreateEvents = (props) => {
                 <Input name="img" onChange={props.handleChange} />
                 <FormLabel>Player Limit</FormLabel>
                 <Input
-                  // value={event.playersLimit}
                   name="playersLimit"
                   onChange={props.handleChange}
                   type="number"
@@ -81,16 +77,6 @@ const CreateEvents = (props) => {
                   onChange={props.handleChange}
                 />
               </CardBody>
-              {/* <Divider />
-              <CardFooter>
-                <Button
-                  variant="solid"
-                  colorScheme="blue"
-                  onClick={props.handleSubmit}
-                >
-                  Submit
-                </Button>
-              </CardFooter> */}
             </Card>
           </ModalBody>
 

@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   ButtonGroup,
   Card,
@@ -8,7 +7,6 @@ import {
   Divider,
   Heading,
   Stack,
-  Text,
 } from "@chakra-ui/react";
 import React from "react";
 

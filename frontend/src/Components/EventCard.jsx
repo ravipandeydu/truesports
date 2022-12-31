@@ -17,9 +17,7 @@ const EventCard = (props) => {
   let startTime = new Date(`${props.startAt}`).toLocaleString();
   let startAtTime = new Date(`${props.startAt}`).getTime();
   let endTime = new Date(`${props.endAt}`).toLocaleString();
-  console.log(startTime);
   let currentTime = new Date().getTime();
-  console.log(currentTime > startAtTime);
   const dispatch = useDispatch();
 
   useEffect(() => {

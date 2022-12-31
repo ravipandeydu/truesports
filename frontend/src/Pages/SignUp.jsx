@@ -34,24 +34,10 @@ const SignUp = () => {
     e.preventDefault();
     try {
       dispatch(signupSuccess({ username, password }));
-      // .then(
-      //   (data) => data.json()
-      // if (error) {
-      // console.log(data);
-      // } else {
-      //   alert("signup Successful");
-      //   navigate("/signin");
-      // }
-      // )
-      // .then((data) => console.log(data));
     } catch (e) {
       console.log(e);
     }
   }
-
-  // if (!error) {
-  //   navigate("/signin");
-  // }
 
   return (
     <Box align={"center"}>
@@ -69,7 +55,7 @@ const SignUp = () => {
           <Input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            type="text"
+            type="password"
           />
         </CardBody>
         <Divider />

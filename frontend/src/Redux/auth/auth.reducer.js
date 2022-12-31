@@ -13,8 +13,9 @@ let initialState = {
   error: false,
   errormsg: "",
   isAuth: false,
+  token: localStorage.getItem("token") || "",
   successmsg: "",
-  user: {},
+  user: JSON.parse(localStorage.getItem("user")) || {},
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -34,22 +35,28 @@ export const authReducer = (state = initialState, { type, payload }) => {
       };
     }
     case AUTH_LOGIN_SUCCESS: {
+      localStorage.setItem("token", payload.token);
+      localStorage.setItem("user", JSON.stringify(payload));
       return {
         ...state,
         loading: false,
         error: false,
         isAuth: true,
         errormsg: "",
+        token: localStorage.getItem("token"),
         successmsg: payload.message,
-        user: payload,
+        user: JSON.parse(localStorage.getItem("user")),
       };
     }
     case AUTH_LOGOUT: {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       return {
         ...state,
         loading: false,
         error: false,
         isAuth: false,
+        token: "",
         user: {},
       };
     }

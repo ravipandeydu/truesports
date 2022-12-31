@@ -8,6 +8,7 @@ import {
   Flex,
   FormLabel,
   Heading,
+  Image,
   Input,
   Select,
   Spacer,
@@ -43,6 +44,7 @@ const MyEvents = () => {
   console.log(token);
   const [users, setUsers] = useState([]);
   const [event, setEvent] = useState(initEvent);
+  const loading = useSelector((state) => state.events.loading);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const perPage = 5;
@@ -76,7 +78,12 @@ const MyEvents = () => {
   }, []);
   return (
     <Box align="center">
-      <Box position={"sticky"} top="70px" bg={useColorModeValue('white', '#1a202c')} zIndex={10}>
+      <Box
+        position={"sticky"}
+        top="70px"
+        bg={useColorModeValue("white", "#1a202c")}
+        zIndex={10}
+      >
         <Heading my={"40px"}>My Events</Heading>
         <Box align="right" maxW={"2xl"} mb="10px">
           <CreateEvents
@@ -85,68 +92,43 @@ const MyEvents = () => {
           />
         </Box>
       </Box>
-
-      {/* <Card maxW="lg">
-        <CardBody>
-          <FormLabel>Category</FormLabel>
-          <Select
-            mt="4px"
-            maxW="xl"
-            mr="100px"
-            name="gameType"
-            placeholder="Select option"
-            onChange={handleChange}
-          >
-            <option value="Cricket">Cricket</option>
-            <option value="Football">Football</option>
-            <option value="Basketball">Basketball</option>
-          </Select>
-          <FormLabel>Title</FormLabel>
-          <Input name="title" onChange={handleChange} />
-          <FormLabel>Desc</FormLabel>
-          <Textarea
-            // value={message}
-            name="desc"
-            onChange={handleChange}
-            type="text"
+      {loading ? (
+        <Flex
+          w="100vw"
+          h={"100vh"}
+          mx={"auto"}
+          align={"center"}
+          justify={"center"}
+          bg={"rgba(245,250,254,.5)"}
+          backgroundBlendMode={"hard-light"}
+          position={"absolute"}
+          top={"0"}
+          left={"0"}
+        >
+          <Image
+            borderRadius={"50%"}
+            src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif?20170503175831"
           />
-          <FormLabel>Image</FormLabel>
-          <Input value={event.img} name="img" onChange={handleChange} />
-          <FormLabel>Player Limit</FormLabel>
-          <Input
-            // value={event.playersLimit}
-            name="playersLimit"
-            onChange={handleChange}
-          />
-          <FormLabel>Start At</FormLabel>
-          <Input type="datetime-local" name="startAt" onChange={handleChange} />
-          <FormLabel>End At</FormLabel>
-          <Input type="datetime-local" name="endAt" onChange={handleChange} />
-        </CardBody>
-        <Divider />
-        <CardFooter>
-          <Button variant="solid" colorScheme="blue" onClick={handleSubmit}>
-            Submit
-          </Button>
-        </CardFooter>
-      </Card> */}
-      {paginatedEvents.map((event) => (
-        <MyEventCard
-          key={event._id}
-          title={event.title}
-          desc={event.desc}
-          eventId={event._id}
-          event={event}
-          gameType={event.gameType}
-          startAt={event.startAt}
-          endAt={event.endAt}
-          organiserId={event.userId}
-          userId={user._id}
-          pending={event.pending}
-          // handleApprove={() => handleApprove()}
-          // handleReject={handleReject}
-        />
-      ))}
+        </Flex>
+      ) : (
+        <Box>
+          {paginatedEvents.map((event) => (
+            <MyEventCard
+              key={event._id}
+              title={event.title}
+              desc={event.desc}
+              eventId={event._id}
+              event={event}
+              gameType={event.gameType}
+              startAt={event.startAt}
+              endAt={event.endAt}
+              organiserId={event.userId}
+              userId={user._id}
+              pending={event.pending}
+            />
+          ))}
+        </Box>
+      )}
       <Pagination
         total={totalPages}
         current={page}

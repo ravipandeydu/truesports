@@ -5,27 +5,23 @@ import {
   CardBody,
   CardFooter,
   Divider,
-  Flex,
   FormLabel,
-  Image,
   Input,
   Alert,
   AlertIcon,
   AlertTitle,
-  AlertDescription,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../Redux/auth/auth.actions";
 
 const SignIn = () => {
-  const { loading, error, errormsg, successmsg } = useSelector(
+  const { loading, error, errormsg } = useSelector(
     (state) => state.auth
   );
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState({});
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
