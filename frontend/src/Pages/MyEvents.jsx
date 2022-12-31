@@ -12,16 +12,16 @@ import {
   Select,
   Spacer,
   Textarea,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CreateEvents from "../Components/CreateEvents";
 import EventCard from "../Components/EventCard";
 import MyEventCard from "../Components/MyEventCard";
-import {
-  getAllEvents,
-  postEvents,
-} from "../Redux/events/events.actions";
+import Pagination from "../Components/Pagination";
+import { getAllEvents, postEvents } from "../Redux/events/events.actions";
 
 const initEvent = {
   title: "",
@@ -44,6 +44,12 @@ const MyEvents = () => {
   const [users, setUsers] = useState([]);
   const [event, setEvent] = useState(initEvent);
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+  const perPage = 5;
+  const totalPages = Math.ceil(myevents.length / perPage);
+  let end = page * perPage;
+  let start = end - perPage;
+  let paginatedEvents = myevents.slice(start, end);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,8 +75,18 @@ const MyEvents = () => {
     dispatch(getAllEvents(token));
   }, []);
   return (
-    <div>
-      <Card maxW="lg">
+    <Box align="center">
+      <Box position={"sticky"} top="70px" bg={useColorModeValue('white', '#1a202c')} zIndex={10}>
+        <Heading my={"40px"}>My Events</Heading>
+        <Box align="right" maxW={"2xl"} mb="10px">
+          <CreateEvents
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        </Box>
+      </Box>
+
+      {/* <Card maxW="lg">
         <CardBody>
           <FormLabel>Category</FormLabel>
           <Select
@@ -113,8 +129,8 @@ const MyEvents = () => {
             Submit
           </Button>
         </CardFooter>
-      </Card>
-      {myevents.map((event) => (
+      </Card> */}
+      {paginatedEvents.map((event) => (
         <MyEventCard
           key={event._id}
           title={event.title}
@@ -131,7 +147,12 @@ const MyEvents = () => {
           // handleReject={handleReject}
         />
       ))}
-    </div>
+      <Pagination
+        total={totalPages}
+        current={page}
+        onChange={(value) => setPage(value)}
+      />
+    </Box>
   );
 };
 

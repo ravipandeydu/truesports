@@ -116,7 +116,7 @@ const AllEvents = () => {
 
   return (
     <Box align="center">
-      <Flex>
+      <Flex my={"40px"}>
         {/* <Select
           mt="4px"
           maxW="sm"
@@ -143,20 +143,18 @@ const AllEvents = () => {
           <option value="Basketball">Basketball</option>
         </Select>
         <Input
-          // mt="4px"
-          // maxW="xl"
-          // ml="20px"
-          // mr="100px"
-          // placeholder="Enter Title"
-          // onChange={(e) => setCompany(e.target.value)}
+          mt="4px"
+          maxW="xl"
+          ml="20px"
+          mr="10px"
           type={"text"}
           name="language"
           onChange={(e) => {
             setText(e.target.value);
           }}
-          placeholder="Search jobs"
+          placeholder="Search Events"
         />
-        <Button onClick={()=>handlesearch(text)}>Search</Button>
+        <Button mt="4px" onClick={()=>handlesearch(text)}>Search</Button>
       </Flex>
       {loading ? (
         <Flex

@@ -1,8 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const {userRoutes} = require("./routes/user.route")
-const {eventRoutes} = require("./routes/event.route")
-const {bookingRoutes} = require("./routes/booking.route")
+const { userRoutes } = require("./routes/user.route");
+const { eventRoutes } = require("./routes/event.route");
 
 const { connection } = require("./config/db");
 
@@ -17,11 +16,9 @@ app.get("/", (req, res) => {
 
 app.use(cors());
 
-app.use("/user", userRoutes)
+app.use("/user", userRoutes);
 
-app.use("/event", eventRoutes)
-
-app.use("/booking", bookingRoutes)
+app.use("/event", eventRoutes);
 
 app.listen(8080, async () => {
   try {

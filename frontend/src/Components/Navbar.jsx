@@ -40,6 +40,9 @@ const Navbar = () => {
       align="center"
       justify="center"
       wrap="nowrap"
+      position={"sticky"}
+      top={0}
+      zIndex={10}
     >
       <Link to="/">
         {/* <Text px={6} py={2} fontSize="xl">

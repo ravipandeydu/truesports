@@ -37,15 +37,15 @@ eventRoutes.delete("/delete/:eventId", authentication, async (req, res) => {
 
 eventRoutes.patch("/edit/:eventId", async (req, res) => {
   const { eventId } = req.params;
-    const updatedEvent = await EventModel.findOneAndUpdate(
-      { _id: eventId },
-      req.body
-    );
-    if (updatedEvent) {
-      res.send(updatedEvent);
-    } else {
-      res.send("couldn't update");
-    }
+  const updatedEvent = await EventModel.findOneAndUpdate(
+    { _id: eventId },
+    req.body
+  );
+  if (updatedEvent) {
+    res.send(updatedEvent);
+  } else {
+    res.send("couldn't update");
+  }
 });
 
 eventRoutes.get("/search", async (req, res) => {
@@ -53,14 +53,14 @@ eventRoutes.get("/search", async (req, res) => {
   if (req.query.q) {
     keyword = req.query.q;
   }
-  
+
   try {
     const event = await EventModel.find({
-      $or: [ {title: { $regex: keyword, $options: "i" }}, {desc: { $regex: keyword, $options: "i" }} ]
-      // title: { $regex: keyword, $options: "i" },
-      // desc: { $regex: keyword, $options: "i" },
+      $or: [
+        { title: { $regex: keyword, $options: "i" } },
+        { desc: { $regex: keyword, $options: "i" } },
+      ],
     });
-    console.log(event);
     return res.status(200).send(event);
   } catch (er) {
     return res.status(403).send(er.message);

@@ -12,10 +12,13 @@ import {
 import React from "react";
 
 const BookedCard = (props) => {
-  let time = (text) => text.substring(11, 16);
-  let day = (text) => text.substring(8, 10);
-  let month = (text) => text.substring(5, 7);
-  let year = (text) => text.substring(0, 4);
+  // let time = (text) => text.substring(11, 16);
+  // let day = (text) => text.substring(8, 10);
+  // let month = (text) => text.substring(5, 7);
+  // let year = (text) => text.substring(0, 4);
+  let startTime = new Date(`${props.startAt}`).toLocaleString();
+  let endTime = new Date(`${props.endAt}`).toLocaleString();
+  console.log(startTime);
   let bg;
   if (props.pending) {
     bg = "yellow.100";
@@ -30,6 +33,8 @@ const BookedCard = (props) => {
       overflow="hidden"
       variant="outline"
       bg={bg}
+      maxW={"2xl"}
+      mb="40px"
     >
       <Image
         objectFit="cover"
@@ -39,7 +44,7 @@ const BookedCard = (props) => {
       />
 
       <Stack>
-        <CardBody>
+        <CardBody align="left">
           {props.gameType === "Cricket" ? (
             <Badge colorScheme="green">{props.gameType}</Badge>
           ) : props.gameType === "Football" ? (
@@ -49,16 +54,16 @@ const BookedCard = (props) => {
           )}
           <Heading size="md">{props.title}</Heading>
           <Text py="2">{props.desc}</Text>
-          <Text py="2">
-            {time(props.startAt)} {day(props.startAt)}-{month(props.startAt)}-
-            {year(props.startAt)}
+          <Text py="2" justifyContent={"left"}>
+            <b>Start At :</b> {startTime}
           </Text>
           <Text py="2">
-            {time(props.endAt)} {day(props.endAt)}-{month(props.endAt)}-
-            {year(props.endAt)}
+            <b>End At :</b> {endTime}
           </Text>
           {props.confirmed ? (
-            <Text py="2">Players: {props.players.length > 0 && props.players.join(", ")}</Text>
+            <Text py="2">
+              <b>Players :</b> {props.players.length > 0 && props.players.join(", ")}
+            </Text>
           ) : (
             ""
           )}
