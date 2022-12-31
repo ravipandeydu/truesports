@@ -20,7 +20,6 @@ import EventCard from "../Components/EventCard";
 import MyEventCard from "../Components/MyEventCard";
 import {
   getAllEvents,
-  getMyEvents,
   postEvents,
 } from "../Redux/events/events.actions";
 
@@ -51,23 +50,23 @@ const MyEvents = () => {
     setEvent({ ...event, [name]: value });
   };
 
-  const handleGetUsers = () => {
-    axios.get("http://localhost:8080/user").then((res) => setUsers(res.data));
-    // .then((data) => console.log(data));
-  };
+  // const handleGetUsers = () => {
+  //   axios.get("http://localhost:8080/user").then((res) => setUsers(res.data));
+  //   // .then((data) => console.log(data));
+  // };
 
-  useEffect(() => {
-    handleGetUsers();
-  }, []);
+  // useEffect(() => {
+  //   handleGetUsers();
+  // }, []);
 
   function handleSubmit() {
     dispatch(postEvents(token, event)).then(() => {
-      dispatch(getAllEvents(token, user));
+      dispatch(getAllEvents(token));
     });
   }
 
   useEffect(() => {
-    dispatch(getAllEvents(token, user));
+    dispatch(getAllEvents(token));
   }, []);
   return (
     <div>

@@ -11,22 +11,31 @@ import {
   POST_EVENTS_SUCCESS,
 } from "./events.types";
 
-export const getAllEvents = (token) => async (dispatch) => {
-  dispatch({ type: GET_EVENTS_LOADING });
-  try {
-    let response = await axios.get("http://localhost:8080/event/", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    // let events = response.data.filter((event) => event.userId !== user._id);
-    dispatch({ type: GET_EVENTS_SUCCESS, payload: response.data });
-    console.log(response);
-    return response.data;
-  } catch (e) {
-    dispatch({ type: GET_EVENTS_ERROR });
-  }
-};
+export const getAllEvents =
+  (token, gameType = "") =>
+  async (dispatch) => {
+    dispatch({ type: GET_EVENTS_LOADING });
+    try {
+      let response = await axios.get("http://localhost:8080/event/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // let events = response.data.filter((event) => event.userId !== user._id);
+      if (!gameType) {
+        dispatch({ type: GET_EVENTS_SUCCESS, payload: response.data });
+        return response.data;
+      } else {
+        let events = response.data.filter(
+          (event) => event.gameType === gameType
+        );
+        dispatch({ type: GET_EVENTS_SUCCESS, payload: events });
+        return response.data;
+      }
+    } catch (e) {
+      dispatch({ type: GET_EVENTS_ERROR });
+    }
+  };
 
 export const getMyEvents = (token, user) => async (dispatch) => {
   dispatch({ type: GET_EVENTS_LOADING });
@@ -70,5 +79,18 @@ export const bookEvents = (eventId, event) => async (dispatch) => {
     dispatch({ type: PATCH_EVENTS_SUCCESS });
   } catch (e) {
     dispatch({ type: PATCH_EVENTS_ERROR });
+  }
+};
+
+export const searchEvents = (r) => async (dispatch) => {
+  dispatch({ type: GET_EVENTS_LOADING });
+  try {
+    let response = await axios.get(`http://localhost:8080/event/search?q=${r}`);
+    // let events = response.data.filter((event) => event.userId === user._id);
+    dispatch({ type: GET_EVENTS_SUCCESS, payload: response.data });
+    console.log(response);
+    return response.data;
+  } catch (e) {
+    dispatch({ type: GET_EVENTS_ERROR });
   }
 };

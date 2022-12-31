@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { bookEvents } from "../Redux/events/events.actions";
 
@@ -22,14 +22,16 @@ const EventCard = (props) => {
   console.log(currentTime > startAtTime);
   const dispatch = useDispatch();
 
-  if (currentTime > startAtTime) {
-    dispatch(
-      bookEvents(props.eventId, {
-        ...props.event,
-        pending: [],
-      })
-    );
-  }
+  useEffect(() => {
+    if (currentTime > startAtTime && props.pendingPlayers.length > 0) {
+      dispatch(
+        bookEvents(props.eventId, {
+          ...props.event,
+          pending: [],
+        })
+      );
+    }
+  }, []);
 
   return (
     <Card
