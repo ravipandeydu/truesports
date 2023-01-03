@@ -14,7 +14,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/auth/auth.actions";
-import logo from "../assets/true-sports-logo.png";
+import logo from "../../public/true-sports-logo.png";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();

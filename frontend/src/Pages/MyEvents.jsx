@@ -58,15 +58,6 @@ const MyEvents = () => {
     setEvent({ ...event, [name]: value });
   };
 
-  // const handleGetUsers = () => {
-  //   axios.get("http://localhost:8080/user").then((res) => setUsers(res.data));
-  //   // .then((data) => console.log(data));
-  // };
-
-  // useEffect(() => {
-  //   handleGetUsers();
-  // }, []);
-
   function handleSubmit() {
     dispatch(postEvents(token, event)).then(() => {
       dispatch(getAllEvents(token));
@@ -125,6 +116,7 @@ const MyEvents = () => {
               organiserId={event.userId}
               userId={user._id}
               pending={event.pending}
+              image={event.img}
             />
           ))}
         </Box>

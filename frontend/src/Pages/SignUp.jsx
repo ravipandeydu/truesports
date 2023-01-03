@@ -13,6 +13,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  Heading,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -41,6 +42,7 @@ const SignUp = () => {
 
   return (
     <Box align={"center"}>
+      <Heading my={"40px"}>Sign Up</Heading>
       <Card maxW="lg">
         <CardBody>
           <FormLabel>Username</FormLabel>

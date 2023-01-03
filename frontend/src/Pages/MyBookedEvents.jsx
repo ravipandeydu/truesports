@@ -57,6 +57,7 @@ const MyBookedEvents = () => {
                 organiserId={event.userId}
                 userId={user?.user?._id}
                 players={event.players}
+                image={event.img}
                 pending={event.pending.includes(user?.user?.username)}
                 rejected={event.rejected.includes(user?.user?.username)}
                 confirmed={event.players.includes(user?.user?.username)}
@@ -76,6 +77,7 @@ const MyBookedEvents = () => {
                 organiserId={event.userId}
                 userId={user?.user?._id}
                 players={event.players}
+                image={event.img}
                 pending={event.pending.includes(user?.user?.username)}
                 rejected={event.rejected.includes(user?.user?.username)}
                 confirmed={event.players.includes(user?.user?.username)}
@@ -95,6 +97,7 @@ const MyBookedEvents = () => {
                 organiserId={event.userId}
                 userId={user?.user?._id}
                 players={event.players}
+                image={event.img}
                 pending={event.pending.includes(user?.user?.username)}
                 rejected={event.rejected.includes(user?.user?.username)}
                 confirmed={event.players.includes(user?.user?.username)}
@@ -114,6 +117,7 @@ const MyBookedEvents = () => {
                 organiserId={event.userId}
                 userId={user?.user?._id}
                 players={event.players}
+                image={event.img}
                 pending={event.pending.includes(user?.user?.username)}
                 rejected={event.rejected.includes(user?.user?.username)}
                 confirmed={event.players.includes(user?.user?.username)}

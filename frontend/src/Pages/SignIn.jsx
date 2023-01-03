@@ -10,6 +10,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
+  Heading,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +39,7 @@ const SignIn = () => {
   };
   return (
     <Box align="center">
+      <Heading my={"40px"}>Sign In</Heading>
       <Card maxW="lg">
         <CardBody>
           <FormLabel>Username</FormLabel>

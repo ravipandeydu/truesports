@@ -31,12 +31,13 @@ const BookedCard = (props) => {
       bg={bg}
       maxW={"2xl"}
       mb="40px"
+      color={"black"}
     >
       <Image
         objectFit="cover"
         maxW={{ base: "100%", sm: "200px" }}
-        src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-        alt="Caffe Latte"
+        src={props.image}
+        alt={props.title}
       />
 
       <Stack>

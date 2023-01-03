@@ -24,6 +24,7 @@ import {
   Spacer,
   Text,
   Textarea,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -76,36 +77,44 @@ const AllEvents = () => {
   };
   return (
     <Box align="center">
-      <Flex my={"40px"}>
-        <Select
-          mt="4px"
-          maxW="sm"
-          ml="20px"
-          mr="100px"
-          name="gameType"
-          placeholder="Filter By Game Type"
-          onChange={(e) => setGameType(e.target.value)}
-        >
-          <option value="Cricket">Cricket</option>
-          <option value="Football">Football</option>
-          <option value="Basketball">Basketball</option>
-        </Select>
-        <Input
-          mt="4px"
-          maxW="xl"
-          ml="20px"
-          mr="10px"
-          type={"text"}
-          name="language"
-          onChange={(e) => {
-            setText(e.target.value);
-          }}
-          placeholder="Search Events"
-        />
-        <Button mt="4px" onClick={() => handlesearch(text)}>
-          Search
-        </Button>
-      </Flex>
+      <Box
+        position={"sticky"}
+        top="70px"
+        bg={useColorModeValue("white", "#1a202c")}
+        zIndex={10}
+      >
+        <Heading my={"20px"}>All Events</Heading>
+        <Flex my={"20px"}>
+          <Select
+            mt="4px"
+            maxW="sm"
+            ml="20px"
+            mr="100px"
+            name="gameType"
+            placeholder="Filter By Game Type"
+            onChange={(e) => setGameType(e.target.value)}
+          >
+            <option value="Cricket">Cricket</option>
+            <option value="Football">Football</option>
+            <option value="Basketball">Basketball</option>
+          </Select>
+          <Input
+            mt="4px"
+            maxW="xl"
+            ml="20px"
+            mr="10px"
+            type={"text"}
+            name="language"
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+            placeholder="Search Events"
+          />
+          <Button mt="4px" onClick={() => handlesearch(text)}>
+            Search
+          </Button>
+        </Flex>
+      </Box>
       {loading ? (
         <Flex
           w="100vw"
@@ -137,6 +146,7 @@ const AllEvents = () => {
               organiserId={event.userId}
               userId={user?._id}
               event={event}
+              image={event.img}
               eventId={event._id}
               players={event.players}
               pendingPlayers={event.pending}
